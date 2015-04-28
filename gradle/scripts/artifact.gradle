@@ -1,0 +1,29 @@
+processResources {
+  inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+      include 'mcmod.info'
+
+        // replace version and mcversion
+        expand 'version': project.modVersion.toString(),
+                'mcVersion': project.minecraft.version,
+                'modId': "$modid".toString(),
+                'modName': "$modname".toString()
+    }
+
+  from(sourceSets.main.resources.srcDirs) {
+    exclude 'mcmod.info'
+  }
+}
+
+jar {
+  baseName = "[$mcversion] $modname";
+  version = project.modVersion.toString()
+
+    manifest {
+      attributes 'FMLCorePlugin': 'com.nerdboy.library.LibraryLoadingPlugin',
+                 'FMLCorePluginContainsFMLMod': 'true'
+    }
+}
+

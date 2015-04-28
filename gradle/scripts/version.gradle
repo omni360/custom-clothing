@@ -1,0 +1,76 @@
+ext.modVersion = getVersion()
+
+class Version {
+    private int major = 0
+    private int minor = 0
+    private int revision = 0
+    private int build = -1
+    private String tag = null
+
+    String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("$major.$minor.$revision");
+
+        if (build > 0) {
+            builder.append(".$build")
+        } else {
+            builder.append(".0");
+        }
+
+        if (tag) {
+            builder.append("-$tag")
+        }
+
+        return builder.toString()
+    }
+}
+
+public Version getVersion() {
+    String build = -1
+    def pipelineCounter = System.getenv('SNAP_PIPELINE_COUNTER')
+    if (pipelineCounter) {
+        build = pipelineCounter
+    }
+    def tag = null
+
+    return new Version(
+            major: Integer.parseInt((String)majorVersion),
+            minor: Integer.parseInt((String)minorVersion),
+            revision: Integer.parseInt((String)revision),
+            build: Integer.parseInt(build),
+            tag: tag)
+}
+
+public Map getPreviousVersion(type){
+    def version = null;
+    try {
+        def outStream = new ByteArrayOutputStream()
+        exec {
+            executable = 'git'
+            args = ['show-ref', '--tags']
+            standardOutput = outStream
+        }
+
+
+
+        def tags = outStream.toString().split('\n')
+        def regex = /.*v(\d+)\.(\d+)\.(\d+)\.(\d+)/
+        if (type && type != "release") {
+            regex += /-/ + type;
+        }
+
+        println regex
+
+        println "TAGS"
+        tags.reverse()
+                .findAll { it ==~ regex}
+                .each { println it }
+
+
+
+
+    } catch (Exception e) {
+        e.printStackTrace()
+    }
+    return null;
+}

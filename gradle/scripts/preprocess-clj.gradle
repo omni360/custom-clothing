@@ -1,0 +1,17 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+def cljSrc = 'src/main/clojure'
+def cljTmp = 'build/tmp-clj'
+
+sourceSets.main.clojure.srcDirs = [cljTmp]
+
+task(preprocessClojureSource, type: Copy) {
+    from cljSrc
+    into cljTmp
+    filter(ReplaceTokens, tokens: [
+            modId: "$modid".toString(),
+            modName: "$modname".toString(),
+            version: project.modVersion.toString()]
+    )
+}
+
+compileClojure.dependsOn(preprocessClojureSource)

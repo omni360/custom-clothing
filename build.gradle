@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "clojars"
+            url = "https://clojars.org/repo"
+        }
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'clojuresque:clojuresque:1.7.0'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+    }
+}
+
+repositories {
+    maven {
+        name = "clojars"
+        url = "https://clojars.org/repo"
+    }
+}
+
+apply plugin: 'clojure'
+apply plugin: 'forge'
+
+dependencies {
+    compile 'org.clojure:clojure:1.6.0'
+}
+
+apply from: 'gradle/scripts/version.gradle'
+apply from: 'gradle/scripts/minecraft.gradle'
+apply from: 'gradle/scripts/artifact.gradle'
+apply from: 'gradle/scripts/preprocess-clj.gradle'
+
+clojure.aotCompile = true
+clojure.warnOnReflection = true
+
+
+
+
+
+
+
