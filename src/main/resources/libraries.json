@@ -1,0 +1,9 @@
+{
+  "libraries": [
+    {
+      "groupId": "org.clojure",
+      "artifactId": "clojure",
+      "version": "1.6.0"
+    }
+  ]
+}
