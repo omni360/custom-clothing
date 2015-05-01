@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "north": "custom-clothing:block/tanning-rack-top-front",
+    "south": "custom-clothing:block/tanning-rack-top-back",
+    "east":  "custom-clothing:block/tanning-rack-top-left",
+    "west":  "custom-clothing:block/tanning-rack-top-right",
+    "up":    "custom-clothing:block/tanning-rack-top-up",
+    "down":  "custom-clothing:block/tanning-rack-top-down"
+  }
+}

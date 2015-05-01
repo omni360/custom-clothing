@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "top=false":  { "model": "custom-clothing:tanning-rack-base"},
+    "facing=north,top=false":  { "model": "custom-clothing:tanning-rack-base"},
+    "facing=east,top=false": { "model": "custom-clothing:tanning-rack-base", "y": 90},
+    "facing=south,top=false":  { "model": "custom-clothing:tanning-rack-base", "y": 180},
+    "facing=west,top=false": { "model": "custom-clothing:tanning-rack-base", "y": 270},
+    "facing=north,top=true":   { "model": "custom-clothing:tanning-rack-top"},
+    "facing=east,top=true":  { "model": "custom-clothing:tanning-rack-top", "y": 90},
+    "facing=south,top=true":   { "model": "custom-clothing:tanning-rack-top", "y": 180},
+    "facing=west,top=true":  { "model": "custom-clothing:tanning-rack-top", "y": 270}
+  }
+}
