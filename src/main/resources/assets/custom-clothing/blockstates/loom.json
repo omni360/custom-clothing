@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "normal":    { "model": "custom-clothing:loom"},
+    "facing=north": { "model": "custom-clothing:loom"},
+    "facing=east":  { "model": "custom-clothing:loom", "y": 90},
+    "facing=south": { "model": "custom-clothing:loom", "y": 180},
+    "facing=west":  { "model": "custom-clothing:loom", "y": 270}
+  }
+}
