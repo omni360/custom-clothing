@@ -1,6 +1,6 @@
 (ns com.nerdboy.custom-clothing.block.loom
   (:require [com.nerdboy.custom-clothing.utils :as utils])
-  (:import [net.minecraft.block Block BlockDirectional]
+  (:import [net.minecraft.block Block BlockDirectional BlockChest]
            [net.minecraft.block.material Material]
            [net.minecraft.block.state BlockState IBlockState]
            [net.minecraft.block.properties IProperty]

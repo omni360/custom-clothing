@@ -1,12 +1,11 @@
 (ns com.nerdboy.custom-clothing.cc-mod
-  (:require [com.nerdboy.custom-clothing.block.loom :as loom]
-            [com.nerdboy.custom-clothing.utils :as utils])
+  (:require [com.nerdboy.custom-clothing.block.loom :as loom])
   (:import [net.minecraft.client Minecraft]
            [net.minecraft.client.resources.model ModelResourceLocation]
-           [net.minecraft.item Item]
+           [net.minecraft.item Item ItemStack]
            [net.minecraftforge.fml.common Mod$EventHandler Mod]
-           [net.minecraftforge.fml.relauncher Side]
-           [net.minecraftforge.fml.common.registry GameRegistry]))
+           [net.minecraftforge.fml.common.registry GameRegistry]
+           [net.minecraft.util ResourceLocation]))
 
 (def block-atom (atom{}))
 
@@ -18,11 +17,19 @@
            :methods [[^{Mod$EventHandler {}} initialize
                       [net.minecraftforge.fml.common.event.FMLInitializationEvent]
                       void]])
-
+(defn get-item [name]
+  (.getObject (Item/itemRegistry)
+              (ResourceLocation. name)))
 
 (defn -initialize [this event]
-  (swap! block-atom assoc :loom (loom/setup))
-  (let [loom-block (:loom @block-atom)]
+  (let [loom-block (loom/setup)]
+    (GameRegistry/addRecipe (ItemStack. loom-block 1)
+                            (into-array Object
+                                        ["tSt"
+                                         "SSS"
+                                         "S S"
+                                         \t (get-item "string")
+                                         \S (get-item "stick")]))
     (if (.isClient (.getSide event))
       (-> (Minecraft/getMinecraft)
           .getRenderItem
